@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Explosive Fitness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="plans.html">Plans</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="nav-btn-link">Login</a>
+      <a href="register.html" class="nav-cta">Register</a>
+    </div>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-panel">
+        <div class="auth-title">Welcome Back</div>
+        <div class="auth-sub">Sign in to your account</div>
+        <form id="login-form">
+          <div class="field">
+            <input type="email" id="login-email" placeholder=" " required autocomplete="email">
+            <label>Email Address</label>
+          </div>
+          <div class="field">
+            <div style="position:relative">
+              <input type="password" id="login-pass" placeholder=" " required autocomplete="current-password" style="padding-right:44px">
+              <label>Password</label>
+              <button type="button" class="pw-toggle" id="login-pass-t" aria-label="Toggle password">&#x1F441;</button>
+            </div>
+          </div>
+          <div class="check-row" style="margin:16px 0 24px">
+            <label><input type="checkbox" id="remember"> Remember me</label>
+            <a href="#" class="forgot-link" id="forgot-link">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Sign In</button>
+        </form>
+        <div class="auth-bottom" style="margin-top:24px">Don't have an account? <a href="register.html">Create account</a></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/login.js"></script>
+  <script>
+    document.querySelector('.menu-toggle')?.addEventListener('click', function() { this.classList.toggle('active'); document.querySelector('.nav-links')?.classList.toggle('active'); });
+  </script>
+</body>
+</html>

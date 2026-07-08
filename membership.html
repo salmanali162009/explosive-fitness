@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership Card — Explosive Fitness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+  <nav class="navbar scrolled" style="border-bottom:1px solid var(--glass-border)">
+    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="membership.html" class="active">My Card</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" id="logout-top" style="color:#E50914">Logout</a>
+    </div>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="page-top">
+    <div class="container">
+      <h1>Membership <span class="highlight">Card</span></h1>
+      <p>Your premium NFC-style membership credential</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="card-stage">
+        <div class="member-card" id="member-card">
+          <div class="member-card-inner">
+            <div class="card-top">
+              <div class="card-brand">EXPLOSIVE <span>FITNESS</span></div>
+              <div class="card-tier" id="c-plan-tier">Premium</div>
+            </div>
+            <div class="card-body">
+              <img id="c-photo" class="card-photo" src="assets/images/avatar.svg" alt="Member">
+              <div class="card-meta">
+                <h3 id="c-name">Member Name</h3>
+                <div class="roll" id="c-roll">EXP0000</div>
+                <div class="plan" id="c-plan">Premium Plan</div>
+              </div>
+            </div>
+            <div class="card-grid">
+              <div class="card-item"><label>Joining Date</label><span id="c-join">—</span></div>
+              <div class="card-item"><label>Expiry Date</label><span id="c-exp">—</span></div>
+              <div class="card-item"><label>Emergency</label><span id="c-emerg">—</span></div>
+              <div class="card-item"><label>Gym Contact</label><span id="c-gym">+92 300 1234567</span></div>
+            </div>
+            <div class="card-qr" id="c-qr"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-primary btn-sm" id="dl-png">Download PNG</button>
+        <button class="btn btn-secondary btn-sm" id="dl-pdf">Download PDF</button>
+        <button class="btn btn-secondary btn-sm" id="print-btn">Print Card</button>
+        <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="js/card.js"></script>
+  <script>
+    document.getElementById('logout-top')?.addEventListener('click', async (e) => { e.preventDefault(); const { logout } = await import('./js/auth.js'); await logout(); window.location.href = 'login.html'; });
+  </script>
+  <script>
+    document.querySelector('.menu-toggle')?.addEventListener('click', function() { this.classList.toggle('active'); document.querySelector('.nav-links')?.classList.toggle('active'); });
+  </script>
+</body>
+</html>

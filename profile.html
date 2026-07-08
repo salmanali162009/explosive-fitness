@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — Explosive Fitness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+  <nav class="navbar scrolled" style="border-bottom:1px solid var(--glass-border)">
+    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="membership.html">My Card</a>
+      <a href="profile.html" class="active">Profile</a>
+      <a href="attendance.html">Attendance</a>
+      <a href="#" id="logout-top" style="color:#E50914">Logout</a>
+    </div>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div style="padding-top:var(--nav-height);background:linear-gradient(180deg,var(--surface),var(--canvas))">
+    <div class="container" style="padding:60px 32px;text-align:center">
+      <img id="p-photo" src="assets/images/avatar.svg" alt="Profile" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--primary);margin:0 auto 16px">
+      <h1 style="font-family:var(--font-display);font-weight:800;font-size:1.75rem" id="p-name-h">Member</h1>
+      <p style="color:var(--text-secondary)">Roll #<span id="p-roll">EXP0000</span> &middot; <span id="p-email">email@domain.com</span></p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="auth-box" style="max-width:680px;margin:0 auto">
+        <div class="auth-panel wide">
+          <h2 style="font-family:var(--font-display);font-weight:700;font-size:1.25rem;margin-bottom:28px">Edit Profile</h2>
+          <form id="p-form">
+            <div style="margin-bottom:20px">
+              <label style="font-family:var(--font-ui);font-weight:600;font-size:0.80rem;color:var(--text-secondary);display:block;margin-bottom:8px;letter-spacing:0.5px">PROFILE IMAGE</label>
+              <div class="upload-zone" id="p-upload-zone">
+                <input type="file" id="p-img" accept="image/*">
+                <div class="upload-default">
+                  <div class="upload-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="12"/><line x1="15" y1="15" x2="12" y2="12"/></svg></div>
+                  <div class="upload-text">Click to change photo</div>
+                  <div class="upload-hint">PNG, JPG or WebP &middot; Max 5MB</div>
+                </div>
+                <div class="upload-preview" id="p-upload-preview">
+                  <img id="p-preview-img" src="" alt="Preview">
+                  <div class="upload-preview-overlay"><span>Change photo</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="field"><input type="text" id="p-name" placeholder=" "><label>Full Name</label></div>
+            <div class="field"><input type="tel" id="p-phone" placeholder=" "><label>Contact Number</label></div>
+            <div class="field"><input type="text" id="p-addr" placeholder=" "><label>Address</label></div>
+            <div class="field"><input type="text" id="p-emerg" placeholder=" "><label>Emergency Contact</label></div>
+            <div class="field">
+              <select id="p-plan" style="padding-top:20px"><option value="">Select Plan</option><option value="Starter Monthly">Starter Monthly</option><option value="Starter Quarterly">Starter Quarterly</option><option value="Starter Yearly">Starter Yearly</option><option value="Premium Monthly">Premium Monthly</option><option value="Premium Quarterly">Premium Quarterly</option><option value="Premium Yearly">Premium Yearly</option><option value="VIP">VIP</option></select>
+              <label>Membership Plan</label>
+            </div>
+            <div class="field">
+              <select id="p-goal" style="padding-top:20px"><option value="Weight Loss">Weight Loss</option><option value="Muscle Gain">Muscle Gain</option><option value="General Fitness">General Fitness</option><option value="Strength Training">Strength Training</option><option value="Flexibility">Flexibility & Mobility</option><option value="Athletic Performance">Athletic Performance</option></select>
+              <label>Fitness Goal</label>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:8px">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="js/profile.js"></script>
+  <script>
+    document.getElementById('logout-top')?.addEventListener('click', async (e) => { e.preventDefault(); const { logout } = await import('./js/auth.js'); await logout(); window.location.href = 'login.html'; });
+  </script>
+  <script>
+    document.querySelector('.menu-toggle')?.addEventListener('click', function() { this.classList.toggle('active'); document.querySelector('.nav-links')?.classList.toggle('active'); });
+  </script>
+</body>
+</html>

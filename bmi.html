@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator — Explosive Fitness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="plans.html">Plans</a>
+      <a href="trainers.html">Trainers</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="nav-btn-link">Login</a>
+      <a href="register.html" class="nav-cta">Join Now</a>
+    </div>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="page-top">
+    <div class="container">
+      <div class="section-label" style="justify-content:center">Health Tool</div>
+      <h1>BMI <span class="highlight">Calculator</span></h1>
+      <p>Measure your Body Mass Index and receive personalized guidance</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="bmi-stage">
+        <div class="auth-panel" style="padding:40px">
+          <form id="bmi-form">
+            <div class="form-row">
+              <div class="field"><input type="number" id="bmi-height" placeholder=" " min="50" max="300" required><label>Height (cm)</label></div>
+              <div class="field"><input type="number" id="bmi-weight" placeholder=" " min="20" max="500" required><label>Weight (kg)</label></div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%">Calculate BMI</button>
+          </form>
+
+          <div class="bmi-out" id="bmi-out">
+            <div class="bmi-number" id="bmi-value">0</div>
+            <div class="bmi-label" id="bmi-category">Normal Weight</div>
+            <div class="bmi-track"><div class="bmi-fill" id="bmi-fill" style="width:0%"></div></div>
+            <div class="bmi-tips">
+              <h4>Recommendations</h4>
+              <ul id="bmi-tips"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module">
+    import { calcBMI, bmiCategory } from './js/utils.js';
+    document.getElementById('bmi-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const h = parseFloat(document.getElementById('bmi-height').value);
+      const w = parseFloat(document.getElementById('bmi-weight').value);
+      if (!h || !w) return;
+      const bmi = calcBMI(h, w);
+      const cat = bmiCategory(bmi);
+      document.getElementById('bmi-value').textContent = bmi;
+      document.getElementById('bmi-category').textContent = cat.label;
+      document.getElementById('bmi-category').style.color = cat.color;
+      document.getElementById('bmi-fill').style.width = Math.min((bmi / 40) * 100, 100) + '%';
+      document.getElementById('bmi-fill').style.background = cat.color;
+      document.getElementById('bmi-tips').innerHTML = cat.tips.map(t => '<li>' + t + '</li>').join('');
+      const out = document.getElementById('bmi-out');
+      out.classList.add('show');
+      out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

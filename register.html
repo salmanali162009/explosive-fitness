@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Explosive Fitness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <style>
+    .field-no-red select:has(option:checked) + label,
+    .field-no-red select:focus + label { color:var(--text-tertiary); }
+    .field-no-red select { color:var(--text); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="plans.html">Plans</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="nav-btn-link">Login</a>
+      <a href="register.html" class="nav-cta">Join Now</a>
+    </div>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="auth-page">
+    <div class="auth-box" style="max-width:600px">
+      <div class="auth-panel">
+        <div class="auth-title">Create Account</div>
+        <div class="auth-sub">Join the Explosive Fitness community</div>
+        <form id="reg-form">
+          <div style="margin-bottom:20px">
+            <label style="font-family:var(--font-ui);font-weight:600;font-size:0.80rem;color:var(--text-secondary);display:block;margin-bottom:8px;letter-spacing:0.5px">PROFILE IMAGE</label>
+            <div class="upload-zone" id="reg-upload-zone">
+              <input type="file" id="reg-img" accept="image/*">
+              <div class="upload-default">
+                <div class="upload-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="12"/><line x1="15" y1="15" x2="12" y2="12"/></svg></div>
+                <div class="upload-text">Click to upload photo</div>
+                <div class="upload-hint">PNG, JPG or WebP &middot; Max 5MB</div>
+              </div>
+              <div class="upload-preview" id="reg-upload-preview">
+                <img id="reg-preview-img" src="" alt="Preview">
+                <div class="upload-preview-overlay"><span>Change photo</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="field"><input type="text" id="reg-name" placeholder=" " required><label>Full Name</label></div>
+          <div class="form-row">
+            <div class="field"><input type="text" id="reg-cnic" placeholder=" " required><label>CNIC</label></div>
+            <div class="field field-no-red">
+              <select id="reg-gender" required style="padding-top:20px"><option value="" disabled selected></option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select>
+              <label>Gender</label>
+            </div>
+          </div>
+          <div class="field"><input type="email" id="reg-email" placeholder=" " required><label>Email</label></div>
+          <div class="field">
+            <div style="position:relative"><input type="password" id="reg-pass" placeholder=" " required style="padding-right:44px"><label>Password (min 6 chars)</label><button type="button" class="pw-toggle" id="reg-pass-t" aria-label="Toggle">&#x1F441;</button></div>
+          </div>
+          <div class="field"><input type="text" id="reg-address" placeholder=" "><label>Address</label></div>
+          <div class="form-row">
+            <div class="field field-no-red">
+              <select id="reg-goal" style="padding-top:20px"><option value="" disabled selected></option><option value="Weight Loss">Weight Loss</option><option value="Muscle Gain">Muscle Gain</option><option value="General Fitness">General Fitness</option><option value="Strength Training">Strength Training</option><option value="Flexibility">Flexibility & Mobility</option><option value="Athletic Performance">Athletic Performance</option></select>
+              <label>Fitness Goal</label>
+            </div>
+            <div class="field field-no-red">
+              <select id="reg-plan" required style="padding-top:20px"><option value="" disabled selected></option><option value="Starter Monthly">Starter Monthly - $29</option><option value="Starter Quarterly">Starter Quarterly - $79</option><option value="Starter Yearly">Starter Yearly - $249</option><option value="Premium Monthly">Premium Monthly - $79</option><option value="Premium Quarterly">Premium Quarterly - $199</option><option value="Premium Yearly">Premium Yearly - $699</option><option value="VIP">VIP - $149/mo</option></select>
+              <label>Membership Plan</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Create Account</button>
+        </form>
+        <div class="auth-bottom">Already have an account? <a href="login.html">Sign in</a></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/register.js"></script>
+  <script>
+    document.querySelector('.menu-toggle')?.addEventListener('click', function() { this.classList.toggle('active'); document.querySelector('.nav-links')?.classList.toggle('active'); });
+  </script>
+</body>
+</html>

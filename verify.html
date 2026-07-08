@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email — Explosive Fitness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="plans.html">Plans</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="nav-btn-link">Login</a>
+      <a href="register.html" class="nav-cta">Register</a>
+    </div>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-panel" style="text-align:center;padding:48px 40px">
+        <div style="width:72px;height:72px;margin:0 auto 20px;background:rgba(34,197,94,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="auth-title" style="margin-bottom:8px">Verify Your Email</div>
+        <p style="color:var(--text-secondary);font-size:0.90rem;margin-bottom:4px;line-height:1.6">
+          We've sent a verification link to<br>
+          <strong id="v-email" style="color:var(--text-primary)">your email</strong>
+        </p>
+        <p style="color:var(--text-tertiary);font-size:0.82rem;margin-bottom:28px;line-height:1.5">
+          Click the link in the email to activate your account.<br>
+          Check your spam folder if you don't see it.
+        </p>
+
+        <div id="v-status" style="margin-bottom:20px;display:none"></div>
+
+        <button class="btn btn-primary" id="v-check" style="width:100%;margin-bottom:12px">I've Verified — Check Now</button>
+        <button class="btn" id="v-resend" style="width:100%;margin-bottom:12px;background:rgba(255,255,255,0.06);color:var(--text-secondary);border:none;padding:12px 20px;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer">Resend Verification Email</button>
+        <a href="login.html" class="btn btn-secondary" style="display:block;text-align:center">Go to Login</a>
+
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--glass-border)">
+          <p style="font-size:0.80rem;color:var(--text-tertiary)">
+            Already verified? <a href="login.html" style="color:var(--primary)">Sign in here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/verify.js"></script>
+  <script>
+    document.querySelector('.menu-toggle')?.addEventListener('click', function() { this.classList.toggle('active'); document.querySelector('.nav-links')?.classList.toggle('active'); });
+  </script>
+</body>
+</html>

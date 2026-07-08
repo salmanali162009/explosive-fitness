@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance — Explosive Fitness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+  <nav class="navbar scrolled" style="border-bottom:1px solid var(--glass-border)">
+    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="attendance.html" class="active">Attendance</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" id="logout-top" style="color:#E50914">Logout</a>
+    </div>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="page-top">
+    <div class="container">
+      <h1>Attendance <span class="highlight">Tracking</span></h1>
+      <p>Mark your daily gym attendance</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="attend-stage">
+        <div class="attend-profile">
+          <img id="a-photo" src="assets/images/avatar.svg" alt="Member">
+          <h2 id="a-name">Member Name</h2>
+          <span class="roll" id="a-roll">EXP0000</span>
+          <span style="color:var(--text-secondary);font-size:0.90rem" id="a-plan">Plan: —</span>
+          <span style="color:var(--text-tertiary);font-size:0.85rem" id="a-date">Date: —</span>
+        </div>
+
+        <div id="attend-status"></div>
+
+        <div style="margin-top:48px;padding:32px;background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius-lg);text-align:left">
+          <h3 style="font-family:var(--font-display);font-weight:700;font-size:0.95rem;margin-bottom:12px">How It Works</h3>
+          <p style="color:var(--text-secondary);font-size:0.85rem;line-height:2">
+            Present your QR code at the front desk for scanning.<br>
+            The admin scans your card to mark your attendance.<br>
+            Duplicate entries for the same date are prevented automatically.
+          </p>
+        </div>
+
+        <div id="a-history" style="margin-top:32px;padding:24px;background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius-lg);text-align:left;display:none">
+          <h3 style="font-family:var(--font-display);font-weight:700;font-size:0.95rem;margin-bottom:16px">Attendance <span class="highlight">History</span></h3>
+          <div id="a-history-list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="js/attendance.js"></script>
+  <script>
+    document.getElementById('logout-top')?.addEventListener('click', async (e) => { e.preventDefault(); const { logout } = await import('./js/auth.js'); await logout(); window.location.href = 'login.html'; });
+  </script>
+  <script>
+    document.querySelector('.menu-toggle')?.addEventListener('click', function() { this.classList.toggle('active'); document.querySelector('.nav-links')?.classList.toggle('active'); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Details — Explosive Fitness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <style>
+    @keyframes ud-spin { to { transform:rotate(360deg); } }
+    .ud-loader { width:36px;height:36px;margin:0 auto;border:3px solid rgba(255,255,255,0.08);border-top-color:var(--primary);border-radius:50%;animation:ud-spin .7s linear infinite; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled" style="border-bottom:1px solid var(--glass-border)">
+    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="admin.html">Admin</a>
+      <a href="admin.html" style="color:#E50914">&larr; Back to Panel</a>
+    </div>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="admin-dash">
+    <main class="admin-main" id="admin-main" style="margin-left:0;max-width:960px;margin:0 auto;padding-top:32px">
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <img id="detail-photo" src="assets/images/avatar.svg" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--glass-border);background:var(--surface)">
+          <div>
+            <a href="admin.html" style="color:var(--text-secondary);font-size:0.85rem;text-decoration:none">&larr; Back to Admin</a>
+            <h1 id="detail-name" style="font-family:var(--font-display);font-weight:800;font-size:1.5rem;margin:8px 0 0">User Details</h1>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn" id="toggle-status-btn" style="background:rgba(34,197,94,0.10);color:#22c55e;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer">Mark as Dropout</button>
+          <button class="btn btn-danger" id="delete-user-btn" style="background:rgba(239,68,68,0.10);color:#ef4444;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer">Delete User</button>
+        </div>
+      </div>
+
+      <div id="detail-loading" style="text-align:center;padding:80px 0"><div class="ud-loader"></div></div>
+
+      <div id="detail-content" style="display:none">
+
+        <div class="admin-stats" id="user-stats">
+          <div class="admin-stat-card"><div class="label">Roll Number</div><div class="value" id="u-roll">-</div></div>
+          <div class="admin-stat-card"><div class="label">Membership</div><div class="value" id="u-status">-</div></div>
+          <div class="admin-stat-card"><div class="label">Plan</div><div class="value" id="u-plan">-</div></div>
+          <div class="admin-stat-card"><div class="label">Attendance</div><div class="value" id="u-att-count">0</div></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px">
+          <div><strong class="detail-label">Full Name</strong><span class="detail-value" id="u-name">-</span></div>
+          <div><strong class="detail-label">Email</strong><span class="detail-value" id="u-email">-</span></div>
+          <div><strong class="detail-label">CNIC</strong><span class="detail-value" id="u-cnic">-</span></div>
+          <div><strong class="detail-label">Gender</strong><span class="detail-value" id="u-gender">-</span></div>
+          <div><strong class="detail-label">Goal</strong><span class="detail-value" id="u-goal">-</span></div>
+          <div><strong class="detail-label">Address</strong><span class="detail-value" id="u-address">-</span></div>
+          <div><strong class="detail-label">Joined</strong><span class="detail-value" id="u-joined">-</span></div>
+          <div><strong class="detail-label">Membership Expiry</strong><span class="detail-value" id="u-expiry">-</span></div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;margin-bottom:24px">
+          <h3 style="font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:12px">Fee History</h3>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:0.70rem;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;background:rgba(255,255,255,0.02);border-radius:var(--radius-sm) var(--radius-sm) 0 0">
+            <span>Month</span>
+            <span>Status / Action</span>
+          </div>
+          <div id="fee-list" style="max-height:400px;overflow-y:auto"></div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;margin-bottom:40px">
+          <h3 style="font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:12px">Attendance Records</h3>
+          <div id="attendance-list" style="max-height:400px;overflow-y:auto">
+            <div style="text-align:center;padding:40px;color:var(--text-tertiary)">Loading attendance...</div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="confirm-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99998;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+    <div style="background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:32px;max-width:380px;width:90%;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.4)">
+      <div id="modal-icon" style="width:48px;height:48px;margin:0 auto 16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem"></div>
+      <h3 id="modal-title" style="font-family:var(--font-display);font-weight:700;font-size:1.1rem;margin-bottom:6px">Confirm</h3>
+      <p id="modal-msg" style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:24px;line-height:1.6">Are you sure?</p>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <button id="modal-cancel" style="background:rgba(255,255,255,0.08);color:var(--text-secondary);border:none;padding:10px 24px;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">Cancel</button>
+        <button id="modal-confirm" style="border:none;padding:10px 24px;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('.menu-toggle')?.addEventListener('click', function() { this.classList.toggle('active'); document.querySelector('.nav-links')?.classList.toggle('active'); });
+  </script>
+  <script src="js/user-detail.js"></script>
+</body>
+</html>
