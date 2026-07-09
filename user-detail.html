@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Details — Explosive Fitness</title>
+  <title>User Details — XPLOSIVE Fitness</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/admin.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -15,7 +15,7 @@
 <body>
 
   <nav class="navbar scrolled" style="border-bottom:1px solid var(--glass-border)">
-    <a href="index.html" class="nav-logo">EXPLOSIVE <span>FITNESS</span></a>
+    <a href="index.html" class="nav-logo">XPLOSIVE <span>FITNESS</span></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="admin.html">Admin</a>
@@ -27,55 +27,92 @@
   <div class="admin-dash">
     <main class="admin-main" id="admin-main" style="margin-left:0;max-width:960px;margin:0 auto;padding-top:32px">
 
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
-        <div style="display:flex;align-items:center;gap:16px">
-          <img id="detail-photo" src="assets/images/avatar.svg" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--glass-border);background:var(--surface)">
-          <div>
-            <a href="admin.html" style="color:var(--text-secondary);font-size:0.85rem;text-decoration:none">&larr; Back to Admin</a>
-            <h1 id="detail-name" style="font-family:var(--font-display);font-weight:800;font-size:1.5rem;margin:8px 0 0">User Details</h1>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="btn" id="toggle-status-btn" style="background:rgba(34,197,94,0.10);color:#22c55e;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer">Mark as Dropout</button>
-          <button class="btn btn-danger" id="delete-user-btn" style="background:rgba(239,68,68,0.10);color:#ef4444;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer">Delete User</button>
-        </div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+        <a href="admin.html" style="color:var(--text-secondary);font-size:0.85rem;text-decoration:none">&larr; Back to Admin</a>
       </div>
 
       <div id="detail-loading" style="text-align:center;padding:80px 0"><div class="ud-loader"></div></div>
 
       <div id="detail-content" style="display:none">
 
-        <div class="admin-stats" id="user-stats">
-          <div class="admin-stat-card"><div class="label">Roll Number</div><div class="value" id="u-roll">-</div></div>
-          <div class="admin-stat-card"><div class="label">Membership</div><div class="value" id="u-status">-</div></div>
-          <div class="admin-stat-card"><div class="label">Plan</div><div class="value" id="u-plan">-</div></div>
-          <div class="admin-stat-card"><div class="label">Attendance</div><div class="value" id="u-att-count">0</div></div>
-        </div>
+        <div class="user-profile-card">
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px">
-          <div><strong class="detail-label">Full Name</strong><span class="detail-value" id="u-name">-</span></div>
-          <div><strong class="detail-label">Email</strong><span class="detail-value" id="u-email">-</span></div>
-          <div><strong class="detail-label">CNIC</strong><span class="detail-value" id="u-cnic">-</span></div>
-          <div><strong class="detail-label">Gender</strong><span class="detail-value" id="u-gender">-</span></div>
-          <div><strong class="detail-label">Goal</strong><span class="detail-value" id="u-goal">-</span></div>
-          <div><strong class="detail-label">Address</strong><span class="detail-value" id="u-address">-</span></div>
-          <div><strong class="detail-label">Joined</strong><span class="detail-value" id="u-joined">-</span></div>
-          <div><strong class="detail-label">Membership Expiry</strong><span class="detail-value" id="u-expiry">-</span></div>
-        </div>
-
-        <div style="background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;margin-bottom:24px">
-          <h3 style="font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:12px">Fee History</h3>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:0.70rem;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;background:rgba(255,255,255,0.02);border-radius:var(--radius-sm) var(--radius-sm) 0 0">
-            <span>Month</span>
-            <span>Status / Action</span>
+          <div class="user-cover">
+            <div class="user-cover-actions">
+              <button class="btn" id="toggle-status-btn">Mark as Dropout</button>
+              <button class="btn btn-del" id="delete-user-btn">Delete</button>
+            </div>
           </div>
-          <div id="fee-list" style="max-height:400px;overflow-y:auto"></div>
-        </div>
 
-        <div style="background:var(--surface);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;margin-bottom:40px">
-          <h3 style="font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:12px">Attendance Records</h3>
-          <div id="attendance-list" style="max-height:400px;overflow-y:auto">
-            <div style="text-align:center;padding:40px;color:var(--text-tertiary)">Loading attendance...</div>
+          <div class="user-profile-info">
+            <img id="detail-photo" src="assets/images/avatar.svg" alt="" class="user-profile-avatar">
+            <div class="user-profile-meta">
+              <h1 id="detail-name">User Details</h1>
+              <div class="tags">
+                <span>Roll: <strong id="u-roll">-</strong></span>
+                <span>Plan: <strong id="u-plan">-</strong></span>
+                <span id="u-status-display"><strong class="user-badge active" id="u-status">-</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="user-profile-body">
+
+            <div class="user-stats-row">
+              <div class="stat"><div class="num blue" id="u-att-count2">0</div><div class="lbl">Attendance</div></div>
+              <div class="stat"><div class="num green" id="u-active-months">-</div><div class="lbl">Active Months</div></div>
+              <div class="stat"><div class="num green" id="u-fees-paid">-</div><div class="lbl">Fees Paid</div></div>
+              <div class="stat"><div class="num red" id="u-fees-due">-</div><div class="lbl">Fees Due</div></div>
+            </div>
+
+            <div class="user-detail-grid">
+              <div class="field-item">
+                <div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <div class="field-content"><span class="field-label">Full Name</span><div class="field-value" id="u-name">-</div></div>
+              </div>
+              <div class="field-item">
+                <div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <div class="field-content"><span class="field-label">Email</span><div class="field-value" id="u-email">-</div></div>
+              </div>
+              <div class="field-item">
+                <div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                <div class="field-content"><span class="field-label">CNIC</span><div class="field-value" id="u-cnic">-</div></div>
+              </div>
+              <div class="field-item">
+                <div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div class="field-content"><span class="field-label">Gender</span><div class="field-value" id="u-gender">-</div></div>
+              </div>
+              <div class="field-item">
+                <div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="field-content"><span class="field-label">Goal</span><div class="field-value" id="u-goal">-</div></div>
+              </div>
+              <div class="field-item">
+                <div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <div class="field-content"><span class="field-label">Address</span><div class="field-value" id="u-address">-</div></div>
+              </div>
+              <div class="field-item">
+                <div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                <div class="field-content"><span class="field-label">Joined</span><div class="field-value" id="u-joined">-</div></div>
+              </div>
+              <div class="field-item">
+                <div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <div class="field-content"><span class="field-label">Membership Expiry</span><div class="field-value" id="u-expiry">-</div></div>
+              </div>
+            </div>
+
+            <div class="user-section-card">
+              <div class="section-head"><h3>Fee History</h3></div>
+              <div class="list-header"><span>Month</span><span>Status / Action</span></div>
+              <div id="fee-list" style="max-height:400px;overflow-y:auto"></div>
+            </div>
+
+            <div class="user-section-card">
+              <div class="section-head"><h3>Attendance Records</h3><span class="sub">Last 20 days</span></div>
+              <div id="attendance-list">
+                <div style="text-align:center;padding:40px;color:var(--text-tertiary)">Loading attendance...</div>
+              </div>
+            </div>
+
           </div>
         </div>
 

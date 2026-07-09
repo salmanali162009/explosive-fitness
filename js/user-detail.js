@@ -107,6 +107,12 @@ async function initPage() {
     let feeData = await loadFees(userDoc);
     feeData = await ensureFeeDocs(userDoc, u, feeData);
     renderFees(u, feeData);
+    const feeEntries = Object.values(feeData);
+    const paid = feeEntries.filter(f => f.paid).length;
+    const total = feeEntries.length;
+    document.getElementById('u-fees-paid').textContent = paid;
+    document.getElementById('u-fees-due').textContent = total - paid;
+    document.getElementById('u-active-months').textContent = total;
 
     const attData = await loadAttendance(db);
     renderAttendance(attData);
@@ -149,13 +155,13 @@ function renderUserInfo(u) {
   document.getElementById('detail-photo').src = u.photoURL || 'assets/images/avatar.svg';
   document.getElementById('detail-name').textContent = u.fullName || 'User Details';
   document.getElementById('u-roll').textContent = u.rollNumber || '-';
-  document.getElementById('u-status').textContent = u.membershipStatus || '-';
-  const statusEl = document.getElementById('u-status');
-  if (u.membershipStatus === 'active') { statusEl.style.color = '#22c55e'; }
-  else if (u.membershipStatus === 'dropout') { statusEl.style.color = '#f59e0b'; }
-  else { statusEl.style.color = '#ef4444'; }
   document.getElementById('u-plan').textContent = u.plan || '-';
-  document.getElementById('u-att-count').textContent = u.attendanceCount || 0;
+  const statusVal = u.membershipStatus || 'expired';
+  const statusEl = document.getElementById('u-status');
+  const statusLabels = { active: 'Active', dropout: 'Dropout', expired: 'Expired' };
+  statusEl.textContent = statusLabels[statusVal] || statusVal;
+  statusEl.className = 'user-badge ' + statusVal;
+  document.getElementById('u-att-count2').textContent = u.attendanceCount || 0;
   document.getElementById('u-name').textContent = u.fullName || '-';
   document.getElementById('u-email').textContent = u.email || '-';
   document.getElementById('u-cnic').textContent = u.cnic || '-';
@@ -167,15 +173,7 @@ function renderUserInfo(u) {
 
   const toggleBtn = document.getElementById('toggle-status-btn');
   if (toggleBtn) {
-    if (u.membershipStatus === 'active') {
-      toggleBtn.textContent = 'Mark as Dropout';
-      toggleBtn.style.background = 'rgba(245,158,11,0.10)';
-      toggleBtn.style.color = '#f59e0b';
-    } else {
-      toggleBtn.textContent = 'Mark as Active';
-      toggleBtn.style.background = 'rgba(34,197,94,0.10)';
-      toggleBtn.style.color = '#22c55e';
-    }
+    toggleBtn.textContent = u.membershipStatus === 'active' ? 'Mark as Dropout' : 'Mark as Active';
   }
 }
 
